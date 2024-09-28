@@ -21,7 +21,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Random;
 
-class QuestionNare {
+class questionnaire {
     public String ID;
     public String AnswerA, AnswerB, AnswerC, AnswerD, Answer;
 }
@@ -35,7 +35,7 @@ public class englishquiz_test extends AppCompatActivity {
     int pos = 0;
     int kq = 0;
     CountDownTimer Time;
-    public ArrayList<QuestionNare> list = new ArrayList<>();
+    public ArrayList<questionnaire> list = new ArrayList<>();
     public ArrayList<Question> PList = new ArrayList<>();
 
     public void countdown() {
@@ -123,6 +123,13 @@ public class englishquiz_test extends AppCompatActivity {
     }
 
     void Display(int i) {
+        if (list.isEmpty()) {
+            // Handle the case where the list is empty, e.g., show an error message
+            Intent intent = new Intent(englishquiz_test.this, englishquiz.class);
+            startActivity(intent);
+            Toast.makeText(this, "No questions available", Toast.LENGTH_SHORT).show();
+            return;
+        }
         countdown();
         int resID = getResources().getIdentifier(list.get(i).ID, "drawable", getPackageName());
         HinhAnh.setImageResource(resID);
@@ -163,7 +170,7 @@ public class englishquiz_test extends AppCompatActivity {
         if (packageFromCaller != null) {
             int number = packageFromCaller.getInt("number");
             for (int i = 0; i < number; i++) {
-                QuestionNare Q = generateRandomQuestion();
+                questionnaire Q = generateRandomQuestion();
                 list.add(Q);
             }
         } else {
@@ -171,8 +178,8 @@ public class englishquiz_test extends AppCompatActivity {
         }
     }
 
-    public QuestionNare generateRandomQuestion() {
-        QuestionNare Q = new QuestionNare();
+    public questionnaire generateRandomQuestion() {
+        questionnaire Q = new questionnaire();
         Random generator = new Random();
 
         // Generate four random answers ensuring they are unique
@@ -247,17 +254,11 @@ public class englishquiz_test extends AppCompatActivity {
     public void helpLogic(String correctAnswer) {
         switch (correctAnswer) {
             case "A":
-                B.setVisibility(View.INVISIBLE);
-                D.setVisibility(View.INVISIBLE);
-                break;
-            case "B":
-                A.setVisibility(View.INVISIBLE);
-                C.setVisibility(View.INVISIBLE);
-                break;
             case "C":
                 B.setVisibility(View.INVISIBLE);
                 D.setVisibility(View.INVISIBLE);
                 break;
+            case "B":
             case "D":
                 A.setVisibility(View.INVISIBLE);
                 C.setVisibility(View.INVISIBLE);
