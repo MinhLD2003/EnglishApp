@@ -29,7 +29,7 @@ class questionnaire {
 public class englishquiz_test extends AppCompatActivity {
     TextView KetQua, CauHoi, ThoiGian;
     ImageView HinhAnh;
-    RadioGroup RG;
+
     Button TraLoi, TroGiup, BoQua, KetThuc;
     RadioButton A, B, C, D;
     int pos = 0;
@@ -63,7 +63,7 @@ public class englishquiz_test extends AppCompatActivity {
 
         CauHoi = findViewById(R.id.Question);
         KetQua = findViewById(R.id.Result);
-        RG = findViewById(R.id.RadioGroup);
+
         A = findViewById(R.id.RdbA);
         B = findViewById(R.id.RdbB);
         C = findViewById(R.id.RdbC);
@@ -79,7 +79,10 @@ public class englishquiz_test extends AppCompatActivity {
         AddQuestionFromFileTXT();
         CreateQuestion();
         Display(pos);
-
+        A.setOnClickListener(view -> handleRadioButtonSelection(A));
+        B.setOnClickListener(view -> handleRadioButtonSelection(B));
+        C.setOnClickListener(view -> handleRadioButtonSelection(C));
+        D.setOnClickListener(view -> handleRadioButtonSelection(D));
         // End quiz and return to the main screen
         KetThuc.setOnClickListener(v -> {
             Intent intent = new Intent(englishquiz_test.this, englishquiz.class);
@@ -121,7 +124,13 @@ public class englishquiz_test extends AppCompatActivity {
             }
         });
     }
-
+    private void handleRadioButtonSelection(RadioButton selectedRadioButton) {
+        A.setChecked(false);
+        B.setChecked(false);
+        C.setChecked(false);
+        D.setChecked(false);
+        selectedRadioButton.setChecked(true);
+    }
     void Display(int i) {
         if (list.isEmpty()) {
             // Handle the case where the list is empty, e.g., show an error message
@@ -138,7 +147,6 @@ public class englishquiz_test extends AppCompatActivity {
         C.setText(list.get(i).AnswerC);
         D.setText(list.get(i).AnswerD);
         KetQua.setText("Correct answers: " + kq);
-        RG.clearCheck();
         A.setVisibility(View.VISIBLE);
         B.setVisibility(View.VISIBLE);
         C.setVisibility(View.VISIBLE);
@@ -233,7 +241,11 @@ public class englishquiz_test extends AppCompatActivity {
     }
 
     public void checkAnswer() {
-        int idCheck = RG.getCheckedRadioButtonId();
+        int idCheck = -1;
+        if (A.isChecked()) idCheck = R.id.RdbA;
+        else if (B.isChecked()) idCheck = R.id.RdbB;
+        else if (C.isChecked()) idCheck = R.id.RdbC;
+        else if (D.isChecked()) idCheck = R.id.RdbD;
         switch (idCheck) {
             case R.id.RdbA:
                 if (list.get(pos).Answer.equals("A")) kq++;
@@ -247,6 +259,8 @@ public class englishquiz_test extends AppCompatActivity {
             case R.id.RdbD:
                 if (list.get(pos).Answer.equals("D")) kq++;
                 break;
+            default:
+                break;
         }
     }
 
@@ -254,11 +268,17 @@ public class englishquiz_test extends AppCompatActivity {
     public void helpLogic(String correctAnswer) {
         switch (correctAnswer) {
             case "A":
+                B.setVisibility(View.INVISIBLE);
+                C.setVisibility(View.INVISIBLE);
+                break;
             case "C":
                 B.setVisibility(View.INVISIBLE);
                 D.setVisibility(View.INVISIBLE);
                 break;
             case "B":
+                A.setVisibility(View.INVISIBLE);
+                D.setVisibility(View.INVISIBLE);
+                break;
             case "D":
                 A.setVisibility(View.INVISIBLE);
                 C.setVisibility(View.INVISIBLE);

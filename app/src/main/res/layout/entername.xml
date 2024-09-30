@@ -14,7 +14,7 @@
         android:background="@drawable/custom_title"
         android:layout_marginTop="100dp"
         android:layout_gravity="center"
-        android:textColor="@color/black"
+        android:textColor="@color/medium_white"
         android:textStyle="bold"
         />
     <EditText
@@ -24,7 +24,7 @@
         android:hint="@string/username"
         android:padding="10dp"
         android:layout_margin="50dp"
-        android:background="@color/white"
+        android:background="@color/medium_white"
         />
     <Button
         android:id="@+id/Start"
@@ -33,7 +33,7 @@
         android:layout_gravity="center"
         android:text="@string/start"
         android:textSize="20sp"
-        android:textColor="@color/white"
+        android:textColor="@color/medium_white"
         android:textStyle="bold"
         android:textAllCaps="false"
         android:background="@drawable/custom_button"
@@ -46,9 +46,9 @@
         android:text="@string/back"
         android:textSize="20sp"
         android:layout_marginTop="20dp"
-        android:textColor="@color/white"
+        android:textColor="@color/medium_white"
         android:textStyle="bold"
         android:textAllCaps="false"
-        android:background="@drawable/custom_button"
+        android:background="@drawable/custom_button_4"
         />
 </LinearLayout>
