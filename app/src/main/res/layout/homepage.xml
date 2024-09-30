@@ -4,63 +4,68 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal">
+
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:srcCompat="@drawable/background"/>
+        app:srcCompat="@drawable/background" />
+
     <TextView
         android:id="@+id/Title"
         android:layout_width="match_parent"
         android:layout_height="110dp"
-        android:gravity="center"
-        android:background="@drawable/custom_title"
-        android:text="@string/LE"
-        android:textSize="40dp"
-        android:textStyle="bold"
-        android:textColor="@color/black"
-        android:textAlignment="center"
         android:layout_marginTop="70dp"
-        />
+        android:background="@drawable/custom_title"
+        android:gravity="center"
+        android:text="@string/LE"
+        android:textAlignment="center"
+        android:textColor="@color/medium_white"
+        android:textSize="40dp"
+        android:textStyle="bold" />
+
     <Button
         android:id="@+id/EnglishQuiz"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:text="@string/EQ"
-        android:textSize="25sp"
-        android:layout_marginTop="70dp"
+        android:padding="10sp"
+        android:layout_width="280dp"
+        android:layout_height="80dp"
         android:layout_below="@+id/Title"
         android:layout_centerHorizontal="true"
-        android:textColor="@color/white"
-        android:background="@drawable/custom_button"
-        android:textStyle="bold"
+        android:layout_marginTop="70dp"
+        android:background="@drawable/custom_button_rec_1"
+        android:drawableLeft="@drawable/ic_quiz"
+        android:text="@string/EQ"
         android:textAllCaps="false"
-        />
+        android:textColor="@color/white"
+        android:textSize="25sp"
+        android:textStyle="bold" />
+
     <Button
         android:id="@+id/CorrectWord"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:text="@string/CQ"
-        android:textSize="25sp"
-        android:layout_marginTop="40dp"
+        android:padding="10sp"
+        android:layout_width="280dp"
+        android:layout_height="80dp"
         android:layout_below="@+id/EnglishQuiz"
         android:layout_centerHorizontal="true"
-        android:textColor="@color/white"
-        android:background="@drawable/custom_button"
-        android:textStyle="bold"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/custom_button_rec_3"
+        android:drawableLeft="@drawable/ic_correct"
+        android:text="@string/CQ"
         android:textAllCaps="false"
-        />
+        android:textColor="@color/white"
+        android:textSize="25sp"
+        android:textStyle="bold" />
+
     <Button
         android:id="@+id/LogOut"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:text="@string/logout"
-        android:textSize="20sp"
-        android:layout_marginTop="40dp"
         android:layout_below="@+id/CorrectWord"
         android:layout_centerHorizontal="true"
-        android:textColor="@color/white"
-        android:background="@drawable/custom_button"
-        android:textStyle="bold"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/custom_button_4"
+        android:text="@string/logout"
         android:textAllCaps="false"
-        />
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold" />
 </RelativeLayout>
