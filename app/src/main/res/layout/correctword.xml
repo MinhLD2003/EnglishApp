@@ -5,8 +5,8 @@
     android:background="@drawable/background">
     <TextView
         android:id="@+id/Title"
-        android:layout_width="250dp"
-        android:layout_height="50dp"
+        android:layout_width="300dp"
+        android:layout_height="100dp"
         android:layout_centerHorizontal="true"
         android:background="@drawable/custom_title"
         android:text="@string/CQ"
@@ -20,7 +20,7 @@
     <Button
         android:id="@+id/Start"
         android:layout_width="200dp"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:text="@string/start"
         android:layout_marginTop="40dp"
         android:layout_below="@+id/Title"
@@ -34,7 +34,7 @@
     <Button
         android:id="@+id/HighScore"
         android:layout_width="200dp"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:text="@string/highscore"
         android:layout_marginTop="40dp"
         android:layout_below="@+id/Start"
@@ -48,7 +48,7 @@
     <Button
         android:id="@+id/Tutorial"
         android:layout_width="200dp"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:text="@string/tutorial"
         android:layout_marginTop="40dp"
         android:layout_below="@+id/HighScore"
@@ -62,7 +62,7 @@
     <Button
         android:id="@+id/Back"
         android:layout_width="200dp"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:text="@string/back"
         android:layout_marginTop="40dp"
         android:layout_below="@+id/Tutorial"
