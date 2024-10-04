@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
+
     android:orientation="horizontal">
     <TextView
         android:id="@+id/HuongDanChoi"
@@ -10,11 +10,11 @@
         android:layout_height="wrap_content"
         android:textAlignment="center"
         android:text="@string/guideplay"
-        android:background="@drawable/custom_title"
-        android:layout_marginTop="5dp"
+
+        android:layout_marginTop="25dp"
         android:layout_centerHorizontal="true"
         android:textStyle="bold"
-        android:textSize="30dp"
+        android:textSize="30sp"
         android:textColor="@color/black"
         android:gravity="center">
     </TextView>
@@ -22,7 +22,7 @@
         android:id="@+id/HinhAnh"
         android:layout_width="match_parent"
         android:layout_height="500dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="25dp"
         android:layout_below="@id/HuongDanChoi"
         android:layout_centerHorizontal="true"
         android:src="@drawable/huongdanquiz">
@@ -32,8 +32,8 @@
         android:layout_width="150dp"
         android:layout_height="50dp"
         android:layout_below="@+id/HinhAnh"
-        android:layout_marginTop="5dp"
-        android:text="Trở về"
+        android:layout_marginTop="35dp"
+        android:text="@string/back"
         android:textColor="@color/white"
         android:layout_centerHorizontal="true"
         android:textSize="25sp"

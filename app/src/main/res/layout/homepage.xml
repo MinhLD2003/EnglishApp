@@ -1,57 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal">
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        />
-
 
     <TextView
         android:id="@+id/Title"
-        android:layout_width="match_parent"
-        android:layout_height="110dp"
-        android:gravity="center"
+        android:layout_width="411dp"
+        android:layout_height="167dp"
+        android:layout_marginTop="44dp"
         android:background="@drawable/custom_title"
+
         android:text="@string/LE"
-        android:textSize="40dp"
+        android:textAlignment="textStart"
+        android:textColor="@color/white"
+        android:textSize="14sp"
         android:textStyle="bold"
-        android:textColor="@color/black"
-        android:textAlignment="center"
-        android:layout_marginTop="70dp"
-        />
+        android:paddingTop="60sp"
+        android:paddingStart="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <Button
         android:id="@+id/EnglishQuiz"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:text="@string/EQ"
-        android:textSize="25sp"
-        android:layout_marginTop="70dp"
         android:layout_below="@+id/Title"
         android:layout_centerHorizontal="true"
-        android:textColor="@color/white"
+        android:layout_marginTop="34dp"
         android:background="@drawable/custom_button"
-        android:textStyle="bold"
+        android:text="@string/EQ"
         android:textAllCaps="false"
-        />
+        android:textColor="@color/white"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Title" />
+
     <Button
         android:id="@+id/CorrectWord"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:text="@string/CQ"
-        android:textSize="25sp"
-        android:layout_marginTop="40dp"
         android:layout_below="@+id/EnglishQuiz"
         android:layout_centerHorizontal="true"
-        android:textColor="@color/white"
+        android:layout_marginTop="25dp"
         android:background="@drawable/custom_button"
-        android:textStyle="bold"
+        android:text="@string/CQ"
         android:textAllCaps="false"
-        />
+        android:textColor="@color/white"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/EnglishQuiz" />
 
     <Button
         android:id="@+id/Dictionary"
@@ -59,13 +66,16 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/CorrectWord"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="25dp"
         android:background="@drawable/custom_button"
         android:text="@string/dictionary"
         android:textAllCaps="false"
         android:textColor="@color/white"
         android:textSize="20sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/CorrectWord" />
 
     <Button
         android:id="@+id/LogOut"
@@ -73,12 +83,35 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/Dictionary"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="25dp"
         android:background="@drawable/custom_button"
         android:text="@string/logout"
         android:textAllCaps="false"
         android:textColor="@color/white"
         android:textSize="20sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Dictionary" />
 
-</RelativeLayout>
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="149dp"
+        android:layout_height="127dp"
+        android:layout_marginTop="64dp"
+        android:layout_marginEnd="28dp"
+        app:layout_constraintEnd_toEndOf="@+id/Title"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/homepage" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="407dp"
+        android:layout_height="88dp"
+        android:layout_marginTop="65dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/LogOut"
+        app:srcCompat="@drawable/func_homepage" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
