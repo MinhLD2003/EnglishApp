@@ -5,7 +5,7 @@
     <string name="register">Register</string>
     <string name="email"> Email</string>
     <string name="password">Password</string>
-    <string name="LE">Welcome to\nLearning English</string>
+    <string name="LE">Hi  !\nWelcome to\nLearning English</string>
     <string name="EQ">English Quiz</string>
     <string name="CQ">Correct Word</string>
     <string name="start">Start</string>
@@ -13,7 +13,7 @@
     <string name="highscoreCR">High Score\nCorrect Word</string>
     <string name="highscoreEQ">High Score\nEnglish Quiz</string>
     <string name="tutorial">Tutorial</string>
-    <string name="playername">Input Player Name</string>
+    <string name="playername">What is your name?</string>
     <string name="username">Player Name</string>
     <string name="choose">Choose number of questions</string>
     <string name="question">Can you guess what is\nin the picture?</string>
@@ -29,5 +29,5 @@
     <string name="end">X</string>
     <string name="ohno">You need to learn English from scatch!!!</string>
     <string name="logout">Logout</string>
-
+    <string name="dictionary">Dictionary</string>
 </resources>
