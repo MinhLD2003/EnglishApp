@@ -4,10 +4,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal">
+
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:srcCompat="@drawable/background"/>
+        app:srcCompat="@drawable/background" />
+
     <TextView
         android:id="@+id/Title"
         android:layout_width="match_parent"
@@ -49,18 +51,33 @@
         android:textStyle="bold"
         android:textAllCaps="false"
         />
+
+    <Button
+        android:id="@+id/Dictionary"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/CorrectWord"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/custom_button"
+        android:text="@string/dictionary"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
     <Button
         android:id="@+id/LogOut"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:text="@string/logout"
-        android:textSize="20sp"
-        android:layout_marginTop="40dp"
-        android:layout_below="@+id/CorrectWord"
+        android:layout_below="@+id/Dictionary"
         android:layout_centerHorizontal="true"
-        android:textColor="@color/white"
+        android:layout_marginTop="40dp"
         android:background="@drawable/custom_button"
-        android:textStyle="bold"
+        android:text="@string/logout"
         android:textAllCaps="false"
-        />
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
 </RelativeLayout>

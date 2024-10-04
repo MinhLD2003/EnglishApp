@@ -17,11 +17,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Random;
 
-class questionnaire {
+class QuestionNare {
     public String ID;
     public String AnswerA, AnswerB, AnswerC, AnswerD, Answer;
 }
@@ -35,8 +36,8 @@ public class englishquiz_test extends AppCompatActivity {
     int pos = 0;
     int kq = 0;
     CountDownTimer Time;
-    public ArrayList<questionnaire> list = new ArrayList<>();
-    public ArrayList<Question> PList = new ArrayList<>();
+    public ArrayList<QuestionNare> list = new ArrayList();
+    public ArrayList<Question> PList = new ArrayList();
 
     public void countdown() {
         Time = new CountDownTimer(21000, 1000) {
@@ -48,10 +49,18 @@ public class englishquiz_test extends AppCompatActivity {
             public void onFinish() {
                 pos++;
                 if (pos >= list.size()) {
-                    navigateToResult();
-                } else {
-                    Display(pos);
-                }
+                    Intent callerIntent = getIntent();
+                    Bundle packageFromCaller = callerIntent.getBundleExtra("bundle");
+                    String name = packageFromCaller.getString("name");
+                    Intent intent = new Intent(englishquiz_test.this, englishquiz_result.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putInt("kq", kq);
+                    bundle.putInt("num", pos);
+                    bundle.putString("name", name);
+                    intent.putExtra("package", bundle);
+                    startActivity(intent);
+                    finish();
+                } else Display(pos);
             }
         }.start();
     }
@@ -61,75 +70,115 @@ public class englishquiz_test extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.englishquiz_test);
 
-        CauHoi = findViewById(R.id.Question);
-        KetQua = findViewById(R.id.Result);
-        RG = findViewById(R.id.RadioGroup);
-        A = findViewById(R.id.RdbA);
-        B = findViewById(R.id.RdbB);
-        C = findViewById(R.id.RdbC);
-        D = findViewById(R.id.RdbD);
-        TraLoi = findViewById(R.id.Answer);
-        HinhAnh = findViewById(R.id.QuestionPicture);
-        TroGiup = findViewById(R.id.Help);
-        BoQua = findViewById(R.id.Skip);
-        ThoiGian = findViewById(R.id.Time);
-        KetThuc = findViewById(R.id.End);
+        CauHoi = (TextView) findViewById(R.id.Question);
+        KetQua = (TextView) findViewById(R.id.Result);
+        RG = (RadioGroup) findViewById(R.id.RadioGroup);
+        A = (RadioButton) findViewById(R.id.RdbA);
+        B = (RadioButton) findViewById(R.id.RdbB);
+        C = (RadioButton) findViewById(R.id.RdbC);
+        D = (RadioButton) findViewById(R.id.RdbD);
+        TraLoi = (Button) findViewById(R.id.Answer);
+        HinhAnh = (ImageView) findViewById(R.id.QuestionPicture);
+        TroGiup = (Button) findViewById(R.id.Help);
+        BoQua = (Button) findViewById(R.id.Skip);
+        ThoiGian = (TextView) findViewById(R.id.Time);
+        KetThuc = (Button) findViewById(R.id.End);
         final MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.buttonclick);
 
         AddQuestionFromFileTXT();
         CreateQuestion();
         Display(pos);
 
-        // End quiz and return to the main screen
-        KetThuc.setOnClickListener(v -> {
-            Intent intent = new Intent(englishquiz_test.this, englishquiz.class);
-            startActivity(intent);
-            finish();
-        });
-
-        // Help button logic
-        TroGiup.setOnClickListener(v -> {
-            mediaPlayer.start();
-            String correctAnswer = list.get(pos).Answer;
-            helpLogic(correctAnswer);
-            TroGiup.setVisibility(View.INVISIBLE);
-        });
-
-        // Skip question
-        BoQua.setOnClickListener(v -> {
-            Time.cancel();
-            mediaPlayer.start();
-            pos++;
-            if (pos < list.size()) {
-                Display(pos);
-                BoQua.setVisibility(View.INVISIBLE);
-            } else {
-                navigateToResult();
+        KetThuc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(englishquiz_test.this, englishquiz.class);
+                startActivity(intent);
+                finish();
             }
         });
 
-        // Submit answer logic
-        TraLoi.setOnClickListener(v -> {
-            Time.cancel();
-            mediaPlayer.start();
-            checkAnswer();
-            pos++;
-            if (pos >= list.size()) {
-                navigateToResult();
-            } else {
+        TroGiup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mediaPlayer.start();
+                String temp = list.get(pos).Answer;
+                switch (temp) {
+                    case "A":
+                        B.setVisibility(View.INVISIBLE);
+                        D.setVisibility(View.INVISIBLE);
+                        break;
+                    case "B":
+                        A.setVisibility(View.INVISIBLE);
+                        C.setVisibility(View.INVISIBLE);
+                        break;
+                    case "C":
+                        B.setVisibility(View.INVISIBLE);
+                        D.setVisibility(View.INVISIBLE);
+                        break;
+                    case "D":
+                        A.setVisibility(View.INVISIBLE);
+                        C.setVisibility(View.INVISIBLE);
+                        break;
+                }
+                TroGiup.setVisibility(View.INVISIBLE);
+            }
+        });
+
+        BoQua.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Time.cancel();
+                mediaPlayer.start();
+                kq = kq + 1;
+                pos++;
                 Display(pos);
+                BoQua.setVisibility(View.INVISIBLE);
+            }
+        });
+
+        TraLoi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Time.cancel();
+                mediaPlayer.start();
+                int idCheck = RG.getCheckedRadioButtonId();
+                switch (idCheck) {
+                    case R.id.RdbA:
+                        if (list.get(pos).Answer.compareTo("A") == 0) kq = kq + 1;
+                        break;
+                    case R.id.RdbB:
+                        if (list.get(pos).Answer.compareTo("B") == 0) kq = kq + 1;
+                        break;
+                    case R.id.RdbC:
+                        if (list.get(pos).Answer.compareTo("C") == 0) kq = kq + 1;
+                        break;
+                    case R.id.RdbD:
+                        if (list.get(pos).Answer.compareTo("D") == 0) kq = kq + 1;
+                        break;
+                }
+                pos++;
+                if (pos >= list.size()) {
+                    Intent callerIntent = getIntent();
+                    Bundle packageFromCaller = callerIntent.getBundleExtra("bundle");
+                    String name = packageFromCaller.getString("name");
+                    Intent intent1 = new Intent(englishquiz_test.this, englishquiz_result.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putInt("kq", kq);
+                    bundle.putInt("num", pos);
+                    bundle.putString("name", name);
+                    intent1.putExtra("package", bundle);
+                    startActivity(intent1);
+                    pos = 0;
+                    kq = 0;
+                    Display(pos);
+                    finish();
+                } else Display(pos);
             }
         });
     }
 
     void Display(int i) {
-        if (list.isEmpty()) {
-            // Handle the case where the list is empty, e.g., show an error message
-            Intent intent = new Intent(englishquiz_test.this, englishquiz.class);
-            startActivity(intent);
-            Toast.makeText(this, "No questions available", Toast.LENGTH_SHORT).show();
-            return;
-        }
         countdown();
         int resID = getResources().getIdentifier(list.get(i).ID, "drawable", getPackageName());
         HinhAnh.setImageResource(resID);
@@ -137,7 +186,7 @@ public class englishquiz_test extends AppCompatActivity {
         B.setText(list.get(i).AnswerB);
         C.setText(list.get(i).AnswerC);
         D.setText(list.get(i).AnswerD);
-        KetQua.setText("Correct answers: " + kq);
+        KetQua.setText("Câu đúng: " + kq);
         RG.clearCheck();
         A.setVisibility(View.VISIBLE);
         B.setVisibility(View.VISIBLE);
@@ -147,12 +196,11 @@ public class englishquiz_test extends AppCompatActivity {
 
     public void AddQuestionFromFileTXT() {
         try {
-            String splitBy = ",";
-            FileInputStream in = this.openFileInput("Question.txt");
+            InputStream in = getAssets().open("Question.txt");
             BufferedReader br = new BufferedReader(new InputStreamReader(in));
             String line;
             while ((line = br.readLine()) != null) {
-                String[] value = line.split(splitBy);
+                String[] value = line.split(",");
                 PList.add(new Question(value[1], Integer.parseInt(value[0])));
                 // Log questions being loaded
                 System.out.println("Loaded Question: " + value[1]);
@@ -167,102 +215,56 @@ public class englishquiz_test extends AppCompatActivity {
     public void CreateQuestion() {
         Intent callerIntent = getIntent();
         Bundle packageFromCaller = callerIntent.getBundleExtra("bundle");
-        if (packageFromCaller != null) {
-            int number = packageFromCaller.getInt("number");
-            for (int i = 0; i < number; i++) {
-                questionnaire Q = generateRandomQuestion();
-                list.add(Q);
+        int number = packageFromCaller.getInt("number");
+
+        for (int i = 0; i <= number - 1; i++) {
+            QuestionNare Q = new QuestionNare();
+            Random generator = new Random();
+            Q.AnswerA = PList.get(generator.nextInt(50)).getName();
+            do {
+                Q.AnswerB = PList.get(generator.nextInt(50)).getName();
+            } while (Q.AnswerA == Q.AnswerB);
+
+            do {
+                Q.AnswerC = PList.get(generator.nextInt(50)).getName();
+            } while (Q.AnswerC == Q.AnswerB || Q.AnswerC == Q.AnswerA);
+
+            do {
+                Q.AnswerD = PList.get(generator.nextInt(50)).getName();
+            } while (Q.AnswerD == Q.AnswerC || Q.AnswerD == Q.AnswerB || Q.AnswerD == Q.AnswerA);
+
+            int value = generator.nextInt(4);
+            int find = 0;
+
+            switch (value) {
+                case 0:
+                    find = PList.indexOf(searchQuestion(Q.AnswerA));
+                    Q.Answer = "A";
+                    break;
+                case 1:
+                    find = PList.indexOf(searchQuestion(Q.AnswerB));
+                    Q.Answer = "B";
+                    break;
+                case 2:
+                    find = PList.indexOf(searchQuestion(Q.AnswerC));
+                    Q.Answer = "C";
+                    break;
+                case 3:
+                    find = PList.indexOf(searchQuestion(Q.AnswerD));
+                    Q.Answer = "D";
+                    break;
             }
-        } else {
-            Toast.makeText(this, "Bundle is null", Toast.LENGTH_SHORT).show();
+            Q.ID = "a" + PList.get(find).getId();
+            list.add(Q);
         }
     }
 
-    public questionnaire generateRandomQuestion() {
-        questionnaire Q = new questionnaire();
-        Random generator = new Random();
-
-        // Generate four random answers ensuring they are unique
-        Q.AnswerA = PList.get(generator.nextInt(50)).getName();
-        do {
-            Q.AnswerB = PList.get(generator.nextInt(50)).getName();
-        } while (Q.AnswerB.equals(Q.AnswerA));
-
-        do {
-            Q.AnswerC = PList.get(generator.nextInt(50)).getName();
-        } while (Q.AnswerC.equals(Q.AnswerB) || Q.AnswerC.equals(Q.AnswerA));
-
-        do {
-            Q.AnswerD = PList.get(generator.nextInt(50)).getName();
-        } while (Q.AnswerD.equals(Q.AnswerC) || Q.AnswerD.equals(Q.AnswerB) || Q.AnswerD.equals(Q.AnswerA));
-
-        // Randomly pick a correct answer
-        int value = generator.nextInt(4);
-        switch (value) {
-            case 0:
-                Q.Answer = "A";
-                break;
-            case 1:
-                Q.Answer = "B";
-                break;
-            case 2:
-                Q.Answer = "C";
-                break;
-            case 3:
-                Q.Answer = "D";
-                break;
+    public Question searchQuestion(String code) {
+        for (Question in : PList) {
+            if (in.getName().equalsIgnoreCase(code)) {
+                return in;
+            }
         }
-        Q.ID = "a" + PList.get(generator.nextInt(50)).getId();
-        return Q;
-    }
-
-    // Navigation to the result screen
-    public void navigateToResult() {
-        Intent callerIntent = getIntent();
-        Bundle packageFromCaller = callerIntent.getBundleExtra("bundle");
-        String name = packageFromCaller.getString("name");
-
-        Intent intent = new Intent(englishquiz_test.this, englishquiz_result.class);
-        Bundle bundle = new Bundle();
-        bundle.putInt("kq", kq);
-        bundle.putInt("num", pos);
-        bundle.putString("name", name);
-        intent.putExtra("package", bundle);
-        startActivity(intent);
-        finish();
-    }
-
-    public void checkAnswer() {
-        int idCheck = RG.getCheckedRadioButtonId();
-        switch (idCheck) {
-            case R.id.RdbA:
-                if (list.get(pos).Answer.equals("A")) kq++;
-                break;
-            case R.id.RdbB:
-                if (list.get(pos).Answer.equals("B")) kq++;
-                break;
-            case R.id.RdbC:
-                if (list.get(pos).Answer.equals("C")) kq++;
-                break;
-            case R.id.RdbD:
-                if (list.get(pos).Answer.equals("D")) kq++;
-                break;
-        }
-    }
-
-    // Logic for the help button (removes two incorrect answers)
-    public void helpLogic(String correctAnswer) {
-        switch (correctAnswer) {
-            case "A":
-            case "C":
-                B.setVisibility(View.INVISIBLE);
-                D.setVisibility(View.INVISIBLE);
-                break;
-            case "B":
-            case "D":
-                A.setVisibility(View.INVISIBLE);
-                C.setVisibility(View.INVISIBLE);
-                break;
-        }
+        return null;
     }
 }
