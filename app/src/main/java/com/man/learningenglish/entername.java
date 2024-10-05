@@ -9,12 +9,14 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import androidx.annotation.Nullable;
 
 public class entername extends Activity {
     EditText NhapTen;
-    Button BatDau, TroVe;
+    Button BatDau;
+    ImageView TroVe;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -23,7 +25,7 @@ public class entername extends Activity {
 
         NhapTen = (EditText)findViewById(R.id.UserName);
         BatDau= (Button)findViewById(R.id.Start);
-        TroVe = (Button)findViewById(R.id.Back);
+        TroVe = (ImageView) findViewById(R.id.Back);
         final MediaPlayer mediaPlayer = MediaPlayer.create(this,R.raw.buttonclick);
 
         BatDau.setOnClickListener(new View.OnClickListener() {

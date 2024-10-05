@@ -104,14 +104,4 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/homepage" />
 
-    <ImageView
-        android:id="@+id/imageView4"
-        android:layout_width="407dp"
-        android:layout_height="88dp"
-        android:layout_marginTop="65dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/LogOut"
-        app:srcCompat="@drawable/func_homepage" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>
