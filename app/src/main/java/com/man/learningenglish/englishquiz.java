@@ -29,7 +29,7 @@ public class englishquiz extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 mediaPlayer.start();
-                Intent intent = new Intent(englishquiz.this, englishquiz_test.class);
+                Intent intent = new Intent(englishquiz.this, playername.class);
                 startActivity(intent);
             }
         });

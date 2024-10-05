@@ -19,6 +19,7 @@ import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 class questionnaire {
@@ -124,13 +125,23 @@ public class englishquiz_test extends AppCompatActivity {
             }
         });
     }
+
     private void handleRadioButtonSelection(RadioButton selectedRadioButton) {
+
+        A.setBackgroundResource(R.drawable.custom_radiogroup);
+        B.setBackgroundResource(R.drawable.custom_radiogroup);
+        C.setBackgroundResource(R.drawable.custom_radiogroup);
+        D.setBackgroundResource(R.drawable.custom_radiogroup);
+
+        selectedRadioButton.setBackgroundResource(R.drawable.custom_radiogroup_selected);
+
         A.setChecked(false);
         B.setChecked(false);
         C.setChecked(false);
         D.setChecked(false);
         selectedRadioButton.setChecked(true);
     }
+
     void Display(int i) {
         if (list.isEmpty()) {
             // Handle the case where the list is empty, e.g., show an error message
@@ -151,6 +162,10 @@ public class englishquiz_test extends AppCompatActivity {
         B.setVisibility(View.VISIBLE);
         C.setVisibility(View.VISIBLE);
         D.setVisibility(View.VISIBLE);
+        A.setBackgroundResource(R.drawable.custom_radiogroup);
+        B.setBackgroundResource(R.drawable.custom_radiogroup);
+        C.setBackgroundResource(R.drawable.custom_radiogroup);
+        D.setBackgroundResource(R.drawable.custom_radiogroup);
     }
 
     public void AddQuestionFromFileTXT() {
@@ -167,6 +182,7 @@ public class englishquiz_test extends AppCompatActivity {
             }
             br.close();
         } catch (Exception e) {
+            insertDumpData();
             e.printStackTrace();
             Toast.makeText(this, "Error loading questions: " + e.getMessage(), Toast.LENGTH_LONG).show();
         }
@@ -187,21 +203,31 @@ public class englishquiz_test extends AppCompatActivity {
     }
 
     public questionnaire generateRandomQuestion() {
+
+        List<Integer> resultQuesId = new ArrayList<>();
+
         questionnaire Q = new questionnaire();
         Random generator = new Random();
-
         // Generate four random answers ensuring they are unique
-        Q.AnswerA = PList.get(generator.nextInt(50)).getName();
+        Question questionA = PList.get(generator.nextInt(50));
+        Q.AnswerA = questionA.getName();
+        resultQuesId.add(questionA.getId());
         do {
-            Q.AnswerB = PList.get(generator.nextInt(50)).getName();
+            Question ques = PList.get(generator.nextInt(50));
+            Q.AnswerB = ques.getName();
+            resultQuesId.add(ques.getId());
         } while (Q.AnswerB.equals(Q.AnswerA));
 
         do {
-            Q.AnswerC = PList.get(generator.nextInt(50)).getName();
+            Question ques = PList.get(generator.nextInt(50));
+            Q.AnswerC = ques.getName();
+            resultQuesId.add(ques.getId());
         } while (Q.AnswerC.equals(Q.AnswerB) || Q.AnswerC.equals(Q.AnswerA));
 
         do {
-            Q.AnswerD = PList.get(generator.nextInt(50)).getName();
+            Question ques = PList.get(generator.nextInt(50));
+            Q.AnswerD = ques.getName();
+            resultQuesId.add(ques.getId());
         } while (Q.AnswerD.equals(Q.AnswerC) || Q.AnswerD.equals(Q.AnswerB) || Q.AnswerD.equals(Q.AnswerA));
 
         // Randomly pick a correct answer
@@ -220,7 +246,7 @@ public class englishquiz_test extends AppCompatActivity {
                 Q.Answer = "D";
                 break;
         }
-        Q.ID = "a" + PList.get(generator.nextInt(50)).getId();
+        Q.ID = "a" + resultQuesId.get(value);
         return Q;
     }
 
@@ -283,6 +309,63 @@ public class englishquiz_test extends AppCompatActivity {
                 A.setVisibility(View.INVISIBLE);
                 C.setVisibility(View.INVISIBLE);
                 break;
+        }
+    }
+
+    private void insertDumpData() {
+        PList.add(new Question("Apple", 1));
+        PList.add(new Question("Book", 2));
+        PList.add(new Question("Clock", 3));
+        PList.add(new Question("Bicycle", 4));
+        PList.add(new Question("Coin", 5));
+        PList.add(new Question("Wardrobe", 6));
+        PList.add(new Question("Television", 7));
+        PList.add(new Question("Shoes", 8));
+        PList.add(new Question("Washing Machine", 9));
+        PList.add(new Question("Toothbrush", 10));
+        PList.add(new Question("Razor Blade", 11));
+        PList.add(new Question("Scissors", 12));
+        PList.add(new Question("Air Conditioning", 13));
+        PList.add(new Question("Curtain", 14));
+        PList.add(new Question("Mirror", 15));
+        PList.add(new Question("Switch", 16));
+        PList.add(new Question("Comb", 17));
+        PList.add(new Question("Eraser", 18));
+        PList.add(new Question("Tape", 19));
+        PList.add(new Question("Newspaper", 20));
+        PList.add(new Question("Straw", 21));
+        PList.add(new Question("Jigsaw", 22));
+        PList.add(new Question("Bandage", 23));
+        PList.add(new Question("Mask", 24));
+        PList.add(new Question("Wheelchair", 25));
+        PList.add(new Question("Syringe", 26));
+        PList.add(new Question("Crutch", 27));
+        PList.add(new Question("Scale", 28));
+        PList.add(new Question("Saw", 29));
+        PList.add(new Question("Drill", 30));
+        PList.add(new Question("Screwdriver", 31));
+        PList.add(new Question("Wrench", 32));
+        PList.add(new Question("Hammer", 33));
+        PList.add(new Question("Carpet", 34));
+        PList.add(new Question("Wall Cabinet", 35));
+        PList.add(new Question("Necklace", 36));
+        PList.add(new Question("Tweezers", 37));
+        PList.add(new Question("Dental Floss", 38));
+        PList.add(new Question("Tissue", 39));
+        PList.add(new Question("Makeup Kit", 40));
+        PList.add(new Question("Handheld Calculator", 41));
+        PList.add(new Question("Pen", 42));
+        PList.add(new Question("Board", 43));
+        PList.add(new Question("Remote Control", 44));
+        PList.add(new Question("Paper Clip", 45));
+        PList.add(new Question("Clothes Hanger", 46));
+        PList.add(new Question("Clothes Iron", 47));
+        PList.add(new Question("Wooden Blinds", 48));
+        PList.add(new Question("Sink", 49));
+        PList.add(new Question("Flower Vase", 50));
+
+        for (Question question : PList) {
+            System.out.println("Loaded Question: " + question.getName());
         }
     }
 }
