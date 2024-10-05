@@ -6,16 +6,18 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
+
 import androidx.annotation.Nullable;
 
 public class huongdanword extends Activity {
-    Button Back;
+    ImageView Back;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.huongdanword);
-        Back = (Button)findViewById(R.id.Back);
+        Back = (ImageView) findViewById(R.id.Back);
         final MediaPlayer mediaPlayer = MediaPlayer.create(this,R.raw.buttonclick);
 
         Back.setOnClickListener(new View.OnClickListener() {
