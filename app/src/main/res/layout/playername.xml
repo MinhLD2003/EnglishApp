@@ -14,7 +14,7 @@
         android:background="@drawable/custom_title"
         android:layout_marginTop="50dp"
         android:layout_gravity="center"
-        android:textColor="@color/black"
+        android:textColor="@color/medium_white"
         android:textStyle="bold"
         />
     <EditText
@@ -26,19 +26,20 @@
         android:layout_margin="50dp"
         android:background="@color/white"
         />
+
     <TextView
         android:id="@+id/Title2"
         android:layout_width="350dp"
         android:layout_height="wrap_content"
-        android:text="@string/choose"
-        android:textAlignment="center"
-        android:textSize="30dp"
         android:layout_below="@+id/edtname"
         android:layout_gravity="center"
         android:background="@drawable/custom_title"
-        android:textColor="@color/black"
-        android:textStyle="bold"
-        />
+        android:text="@string/choose"
+        android:textAlignment="center"
+        android:textColor="@color/medium_white"
+        android:textSize="30dp"
+        android:textStyle="bold" />
+
     <Spinner
         android:id="@+id/Spinner"
         android:layout_width="100dp"
