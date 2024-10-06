@@ -9,13 +9,15 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import androidx.annotation.Nullable;
 
 
 public class playername extends Activity {
     EditText NhapTen;
-    Button BatDau, TroVe;
+    Button BatDau;
+    ImageView TroVe;
     Spinner Spin;
     String Arr[] = {"5", "6", "7", "8", "9", "10"};
     int ViTri;
@@ -29,7 +31,7 @@ public class playername extends Activity {
         NhapTen = (EditText)findViewById(R.id.UserName);
         BatDau= (Button)findViewById(R.id.Start);
         Spin = (Spinner)findViewById(R.id.Spinner);
-        TroVe = (Button)findViewById(R.id.Back);
+        TroVe = (ImageView)findViewById(R.id.Back);
         final MediaPlayer mediaPlayer = MediaPlayer.create(this,R.raw.buttonclick);
 
         CreateSpin();

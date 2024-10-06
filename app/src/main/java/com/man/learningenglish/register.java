@@ -7,6 +7,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -20,7 +21,8 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class register extends AppCompatActivity {
     private EditText Email, Password;
-    private Button Register, Back;
+    private Button Register;
+    private ImageView Back;
     private FirebaseAuth Authentication;
 
     @Override
@@ -32,7 +34,7 @@ public class register extends AppCompatActivity {
         Email = (EditText)findViewById(R.id.Email);
         Password = (EditText)findViewById(R.id.Password);
         Register = (Button)findViewById(R.id.ButtonRegister);
-        Back = (Button)findViewById(R.id.ButtonBack);
+        Back = (ImageView)findViewById(R.id.ButtonBack);
         final MediaPlayer mediaPlayer = MediaPlayer.create(this,R.raw.buttonclick);
 
         Register.setOnClickListener(new View.OnClickListener() {

@@ -3,16 +3,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context="com.man.learningenglish.MainActivity"
+    android:orientation="vertical"
+
+    android:gravity="center">
+
 
     <ImageView
         android:id="@+id/Logo"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="72dp"
         android:src="@drawable/logo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,60 +24,56 @@
         android:id="@+id/Email"
         android:layout_width="356dp"
         android:layout_height="50dp"
-        android:layout_below="@+id/Logo"
-        android:layout_marginTop="15dp"
+        android:layout_below="@id/Logo"
+        android:layout_marginTop="68dp"
         android:background="@drawable/edittext_rounded"
-        android:gravity="left"
+        android:ems="15"
         android:hint="@string/email"
         android:padding="10dp"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.509"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintTop_toBottomOf="@+id/Logo" />
 
     <EditText
         android:id="@+id/Password"
         android:layout_width="356dp"
         android:layout_height="50dp"
-        android:layout_below="@+id/Email"
-        android:layout_marginTop="15dp"
-        android:background="@drawable/edittext_rounded"
-        android:gravity="left"
+        android:layout_below="@id/Email"
+        android:layout_marginTop="64dp"
+        android:ems="15"
         android:hint="@string/password"
-        android:inputType="textPassword"
         android:padding="10dp"
+        android:inputType="textPassword"
         android:textSize="20sp"
+        android:background="@drawable/edittext_rounded"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.508"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
-
-<!--        <Button-->
-<!--        android:id="@+id/ButtonBack"-->
-<!--        android:layout_width="150dp"-->
-<!--        android:layout_height="50dp"-->
-<!--        android:layout_below="@+id/ButtonRegister"-->
-<!--        android:layout_centerHorizontal="true"-->
-<!--        android:layout_marginTop="46dp"-->
-<!--        android:background="@drawable/custom_button"-->
-<!--        android:text="@string/back"-->
-<!--        android:textAllCaps="false"-->
-<!--        android:textColor="@color/white"-->
-<!--        android:textSize="20sp"-->
-<!--        android:textStyle="bold"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintHorizontal_bias="0.5"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/Password" />-->
+        app:layout_constraintTop_toBottomOf="@+id/Email" />
 
     <Button
-        android:id="@+id/ButtonRegister"
+        android:id="@+id/DangNhap"
         android:layout_width="150dp"
-        android:layout_height="50dp"
-        android:layout_below="@+id/Password"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="35dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/custom_button"
+        android:text="@string/login"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Password" />
+
+    <Button
+        android:id="@+id/DangKy"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
         android:background="@drawable/custom_button"
         android:text="@string/register"
         android:textAllCaps="false"
@@ -83,15 +81,16 @@
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Password" />
+        app:layout_constraintTop_toBottomOf="@+id/DangNhap" />
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="224dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="252dp"
         android:text="Input Your Email"
         android:textColor="#03A9F4"
         android:textSize="16sp"
@@ -100,12 +99,11 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="320dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="360dp"
         android:text="Input Your Password"
         android:textColor="#03A9F4"
         android:textSize="16sp"
@@ -113,12 +111,4 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/ButtonBack"
-        android:layout_width="91dp"
-        android:layout_height="79dp"
-        android:background="@drawable/back_button"
-        android:contentDescription="@string/back"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

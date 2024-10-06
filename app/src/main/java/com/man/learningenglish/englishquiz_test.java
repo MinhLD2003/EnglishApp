@@ -17,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
@@ -170,19 +171,17 @@ public class englishquiz_test extends AppCompatActivity {
 
     public void AddQuestionFromFileTXT() {
         try {
-            String splitBy = ",";
-            FileInputStream in = this.openFileInput("Question.txt");
+            InputStream in = getAssets().open("Question.txt");
             BufferedReader br = new BufferedReader(new InputStreamReader(in));
             String line;
             while ((line = br.readLine()) != null) {
-                String[] value = line.split(splitBy);
+                String[] value = line.split(",");
                 PList.add(new Question(value[1], Integer.parseInt(value[0])));
                 // Log questions being loaded
                 System.out.println("Loaded Question: " + value[1]);
             }
             br.close();
         } catch (Exception e) {
-            insertDumpData();
             e.printStackTrace();
             Toast.makeText(this, "Error loading questions: " + e.getMessage(), Toast.LENGTH_LONG).show();
         }
