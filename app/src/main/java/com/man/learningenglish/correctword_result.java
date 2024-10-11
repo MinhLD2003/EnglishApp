@@ -63,8 +63,6 @@ public class correctword_result extends Activity {
         ngoisao = packageFromCaller.getInt("star");
         readFromFile();
 
-        NgoiSao.setText("Số ngôi sao của bạn là: " + ngoisao);
-        Result.setText("Số câu trả lời: " + sodiem + "/" + socau);
         PieChart = findViewById(R.id.PieChart);
         setupPieChart();
         loadPieChartData();
@@ -77,8 +75,7 @@ public class correctword_result extends Activity {
                 Intent intent = new Intent(correctword_result.this, correctword.class);
                 startActivity(intent);
                 finish();
-            }
-        });
+            } });
 
         PlayAgain.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -1,12 +1,15 @@
 package com.man.learningenglish;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.Chronometer;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,12 +28,20 @@ import java.util.Collections;
 import java.util.List;
 
 public class correctWordTest extends AppCompatActivity {
-    TextView shuffledWordTextView, Timer;
+    TextView shuffledWordTextView;
     Button backButton, nextButton;
     EditText userAnswerEditText;
     List<Word> randomWords;
+
+    private long startTime, totalTimeTaken;
     private int currentWordIndex = 0;
     private int correctAnswers = 0;
+
+    private Chronometer chronometer;
+
+    private static final String PREFS_NAME = "QuizPrefs";
+    private static final String BEST_TIME_KEY = "BestTimeOfTheDay";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,11 +54,12 @@ public class correctWordTest extends AppCompatActivity {
         });
         //Calling Views
         shuffledWordTextView = findViewById(R.id.Question);
-        Timer = findViewById(R.id.Timer);
+        chronometer = findViewById(R.id.chronometer);
         backButton = findViewById(R.id.Back);
         nextButton = findViewById(R.id.Answer);
-        userAnswerEditText = findViewById(R.id.YourAnswer);
+        userAnswerEditText = findViewById(R.id.Answerbox);
         final MediaPlayer mediaPlayer = MediaPlayer.create(this,R.raw.buttonclick);
+        
         // Set Intent on Back Button
         backButton.setOnClickListener(v -> {
             mediaPlayer.start();
@@ -65,6 +77,8 @@ public class correctWordTest extends AppCompatActivity {
             for (Word word : randomWords) {
                 System.out.println("Original: " + word.getOriginal() + ", Shuffled: " + word.getShuffled());
             }
+            startTimer();
+            showNextShuffledWord();
 
         } catch (IOException e) {
             System.out.println("Error reading words from file: " + e.toString());
@@ -72,6 +86,17 @@ public class correctWordTest extends AppCompatActivity {
 
         nextButton.setOnClickListener(v -> checkAnswer());
 
+    }
+
+    private void startTimer() {
+        chronometer.setBase(SystemClock.elapsedRealtime()); // Set the chronometer's base time
+        chronometer.start();
+        startTime = System.currentTimeMillis();
+    }
+
+    private void stopTimer() {
+        chronometer.stop();
+        totalTimeTaken = System.currentTimeMillis() - startTime; // Calculate the total time in milliseconds
     }
 
     private List<Word> readWordsFromFile() throws IOException {
@@ -130,6 +155,7 @@ public class correctWordTest extends AppCompatActivity {
             Toast.makeText(correctWordTest.this, "Incorrect, try again!", Toast.LENGTH_SHORT).show();
         }
     }
+
     private void showNextShuffledWord() {
         if (currentWordIndex < randomWords.size()) {
             Word currentWord = randomWords.get(currentWordIndex);
@@ -137,6 +163,25 @@ public class correctWordTest extends AppCompatActivity {
         } else {
             // All words have been answered
             Toast.makeText(correctWordTest.this, "Quiz complete! You answered " + correctAnswers + " correctly.", Toast.LENGTH_LONG).show();
+            stopTimer();
+            checkBestTime(totalTimeTaken);
+
+        }
+    }
+
+    private void checkBestTime(long currentTime) {
+        SharedPreferences prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+        long bestTime = prefs.getLong(BEST_TIME_KEY, Long.MAX_VALUE); // Retrieve the best time, default to a large value
+
+        if (currentTime < bestTime) {
+            // Save the new best time if the current time is faster
+            SharedPreferences.Editor editor = prefs.edit();
+            editor.putLong(BEST_TIME_KEY, currentTime);
+            editor.apply();
+
+            Toast.makeText(this, "New Best Time: " + (currentTime / 1000) + " seconds!", Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(this, "Total Time: " + (currentTime / 1000) + " seconds.", Toast.LENGTH_LONG).show();
         }
     }
 }
