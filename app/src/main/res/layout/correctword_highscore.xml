@@ -23,7 +23,7 @@
         android:background="@drawable/custom_title"
         android:text="@string/highscoreCR"
         android:textAlignment="center"
-        android:textColor="@color/black"
+        android:textColor="@color/medium_white"
         android:layout_gravity="center"
         android:textSize="30sp"
         android:textStyle="bold"

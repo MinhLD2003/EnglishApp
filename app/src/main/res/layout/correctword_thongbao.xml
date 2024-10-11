@@ -14,7 +14,7 @@
         android:background="@drawable/custom_title"
         android:text="@string/ohno"
         android:textAlignment="center"
-        android:textColor="@color/black"
+        android:textColor="@color/medium_white"
         android:textSize="30dp"
         android:textStyle="bold" />
 
@@ -24,7 +24,7 @@
         android:layout_height="50dp"
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
-        android:background="@drawable/custom_button"
+        android:background="@drawable/custom_button_2"
         android:text="@string/playagain"
         android:textAllCaps="false"
         android:textColor="@color/white"
@@ -37,7 +37,7 @@
         android:layout_height="50dp"
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
-        android:background="@drawable/custom_button"
+        android:background="@drawable/custom_button_4"
         android:text="@string/back"
         android:textAllCaps="false"
         android:textColor="@color/white"

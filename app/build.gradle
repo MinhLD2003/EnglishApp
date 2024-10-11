@@ -1,7 +1,6 @@
 plugins {
     id 'com.android.application'
     id 'com.google.gms.google-services'
-    id 'org.jetbrains.kotlin.android'
 }
 
 android {
@@ -15,9 +14,6 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        vectorDrawables {
-            useSupportLibrary true
-        }
     }
 
     buildTypes {
@@ -32,20 +28,6 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
     namespace 'com.man.learningenglish'
-    kotlinOptions {
-        jvmTarget = '1.8'
-    }
-    buildFeatures {
-        compose true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion '1.5.1'
-    }
-    packaging {
-        resources {
-            excludes += '/META-INF/{AL2.0,LGPL2.1}'
-        }
-    }
 }
 
 dependencies {
