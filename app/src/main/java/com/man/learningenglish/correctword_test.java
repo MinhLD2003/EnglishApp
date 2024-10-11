@@ -175,14 +175,14 @@ public class correctword_test extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.correctword_test);
 
-        CauHoi = (TextView) findViewById(R.id.Question);
-        Diem = (TextView) findViewById(R.id.CorrectAnswer);
-        ThoiGian = (TextView) findViewById(R.id.Time);
-        Tilte = (TextView) findViewById(R.id.Title);
-        TroVe = (Button) findViewById(R.id.Back);
-        KiemTra = (Button) findViewById(R.id.Answer);
-        TraLoi = (EditText) findViewById(R.id.YourAnswer);
-        Star = (TextView) findViewById(R.id.Star);
+        CauHoi = findViewById(R.id.Question);
+        Diem = findViewById(R.id.CorrectAnswer);
+        ThoiGian = findViewById(R.id.Time);
+        Tilte = findViewById(R.id.Title);
+        TroVe = findViewById(R.id.Back);
+        KiemTra = findViewById(R.id.Answer);
+        TraLoi = findViewById(R.id.YourAnswer);
+        Star = findViewById(R.id.Star);
         final MediaPlayer mediaPlayer = MediaPlayer.create(this,R.raw.buttonclick);
         countdown();
         random();
@@ -237,7 +237,7 @@ public class correctword_test extends Activity {
                 }
                 qc++;
                 qc1++;
-                if (qc >= 10) {
+                if (qc >= 5) {
                     Intent callerIntent = getIntent();
                     Bundle packageFromCaller = callerIntent.getBundleExtra("bundle");
                     String name = packageFromCaller.getString("name");
