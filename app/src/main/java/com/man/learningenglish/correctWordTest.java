@@ -23,9 +23,12 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class correctWordTest extends AppCompatActivity {
     TextView shuffledWordTextView;
@@ -59,7 +62,11 @@ public class correctWordTest extends AppCompatActivity {
         nextButton = findViewById(R.id.Answer);
         userAnswerEditText = findViewById(R.id.Answerbox);
         final MediaPlayer mediaPlayer = MediaPlayer.create(this,R.raw.buttonclick);
-        
+
+        chronometer.setBase(SystemClock.elapsedRealtime());
+        chronometer.start();
+        startTime = System.currentTimeMillis();
+
         // Set Intent on Back Button
         backButton.setOnClickListener(v -> {
             mediaPlayer.start();
@@ -169,19 +176,33 @@ public class correctWordTest extends AppCompatActivity {
         }
     }
 
+    public String getCurrentDay() {
+        SimpleDateFormat sdf = new SimpleDateFormat("EEEE", Locale.getDefault()); // Example: "Monday", "Tuesday", etc.
+        return sdf.format(new Date());
+    }
+
     private void checkBestTime(long currentTime) {
-        SharedPreferences prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
-        long bestTime = prefs.getLong(BEST_TIME_KEY, Long.MAX_VALUE); // Retrieve the best time, default to a large value
+        SharedPreferences preferences = getSharedPreferences("quizPrefs", MODE_PRIVATE);
+        long bestTimeToday = preferences.getLong("best_time_" + getCurrentDay(), Long.MAX_VALUE); // Initialize with maximum value
+        long bestTimeAllTime = preferences.getLong("best_time_all_time", Long.MAX_VALUE);
+        // Compare and save the new highest time if current time is greater
+        SharedPreferences.Editor editor = preferences.edit();
 
-        if (currentTime < bestTime) {
-            // Save the new best time if the current time is faster
-            SharedPreferences.Editor editor = prefs.edit();
-            editor.putLong(BEST_TIME_KEY, currentTime);
-            editor.apply();
-
-            Toast.makeText(this, "New Best Time: " + (currentTime / 1000) + " seconds!", Toast.LENGTH_LONG).show();
-        } else {
-            Toast.makeText(this, "Total Time: " + (currentTime / 1000) + " seconds.", Toast.LENGTH_LONG).show();
+        if (currentTime < bestTimeAllTime) {
+            editor.putLong("best_time_all_time", currentTime);
+            bestTimeAllTime = currentTime;
         }
+        if (currentTime < bestTimeToday) {
+            editor.putLong("best_time_" + getCurrentDay(), currentTime);
+            bestTimeToday = currentTime;
+        }
+        editor.apply();
+
+        Intent intent = new Intent(correctWordTest.this, correctWordResult.class);
+        intent.putExtra("currentTime", currentTime); // Time taken in this test
+        intent.putExtra("bestTimeToday", bestTimeToday); // Best time of today
+        intent.putExtra("bestTimeAllTime", bestTimeAllTime); // Best time of all time
+        startActivity(intent);
+        finish();
     }
 }
