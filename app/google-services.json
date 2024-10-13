@@ -1,36 +1,26 @@
 {
   "project_info": {
-    "project_number": "643729578253",
-    "project_id": "login-dbd3b",
-    "storage_bucket": "login-dbd3b.appspot.com"
+    "project_number": "70257796665",
+    "project_id": "english-learn-application",
+    "storage_bucket": "english-learn-application.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:643729578253:android:8134d2a3ac221ea344b844",
+        "mobilesdk_app_id": "1:70257796665:android:ace21dac0fcb062276cfe8",
         "android_client_info": {
           "package_name": "com.man.learningenglish"
         }
       },
-      "oauth_client": [
-        {
-          "client_id": "643729578253-qcv8l3p533blb41dh0ufbahn9igu56qh.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
+      "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyDV6bLnsQX2opaA2S5OKUBFRUi5xi6EJjk"
+          "current_key": "AIzaSyAFbYjuxcDjfkjvihobxVDdTU1N4s1TRGE"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "643729578253-qcv8l3p533blb41dh0ufbahn9igu56qh.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
+          "other_platform_oauth_client": []
         }
       }
     }
