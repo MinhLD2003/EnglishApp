@@ -34,7 +34,7 @@ public class entername extends Activity {
                 mediaPlayer.start();
                 String name;
                 name = NhapTen.getText().toString().trim();
-                Intent intent = new Intent(entername.this, correctword_test.class);
+                Intent intent = new Intent(entername.this, correctWordTest.class);
                 Bundle bundle = new Bundle();
                 bundle.putString("name", name);
                 intent.putExtra("bundle",bundle);
