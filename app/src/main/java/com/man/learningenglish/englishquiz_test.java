@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -118,12 +120,15 @@ public class englishquiz_test extends AppCompatActivity {
             Time.cancel();
             mediaPlayer.start();
             checkAnswer();
-            pos++;
-            if (pos >= list.size()) {
-                navigateToResult();
-            } else {
-                Display(pos);
-            }
+            new Handler(Looper.getMainLooper()).postDelayed(() -> {
+                resetRadioButtonBackgrounds();
+                pos++;
+                if (pos >= list.size()) {
+                    navigateToResult();
+                } else {
+                    Display(pos);
+                }
+            }, 2000);
         });
     }
 
@@ -271,6 +276,9 @@ public class englishquiz_test extends AppCompatActivity {
         else if (B.isChecked()) idCheck = R.id.RdbB;
         else if (C.isChecked()) idCheck = R.id.RdbC;
         else if (D.isChecked()) idCheck = R.id.RdbD;
+
+        highlightAnswers(idCheck, list.get(pos).Answer);
+
         switch (idCheck) {
             case R.id.RdbA:
                 if (list.get(pos).Answer.equals("A")) kq++;
@@ -309,6 +317,68 @@ public class englishquiz_test extends AppCompatActivity {
                 C.setVisibility(View.INVISIBLE);
                 break;
         }
+    }
+    private void highlightAnswers(int selectedId, String correctAnswer) {
+        resetRadioButtonBackgrounds();
+
+        if ((selectedId == R.id.RdbA && correctAnswer.equals("A")) ||
+                (selectedId == R.id.RdbB && correctAnswer.equals("B")) ||
+                (selectedId == R.id.RdbC && correctAnswer.equals("C")) ||
+                (selectedId == R.id.RdbD && correctAnswer.equals("D"))) {
+            switch (selectedId) {
+                case R.id.RdbA:
+                    A.setBackgroundResource(R.drawable.custom_button_3);
+                    break;
+                case R.id.RdbB:
+                    B.setBackgroundResource(R.drawable.custom_button_3);
+                    break;
+                case R.id.RdbC:
+                    C.setBackgroundResource(R.drawable.custom_button_3);
+                    break;
+                case R.id.RdbD:
+                    D.setBackgroundResource(R.drawable.custom_button_3);
+                    break;
+            }
+        } else {
+            switch (selectedId) {
+                case R.id.RdbA:
+                    A.setBackgroundResource(R.drawable.custom_button_4);
+                    break;
+                case R.id.RdbB:
+                    B.setBackgroundResource(R.drawable.custom_button_4);
+                    break;
+                case R.id.RdbC:
+                    C.setBackgroundResource(R.drawable.custom_button_4);
+                    break;
+                case R.id.RdbD:
+                    D.setBackgroundResource(R.drawable.custom_button_4);
+                    break;
+            }
+        }
+
+        switch (correctAnswer) {
+            case "A":
+                A.setBackgroundResource(R.drawable.custom_button_3); // Tô màu xanh
+                break;
+            case "B":
+                B.setBackgroundResource(R.drawable.custom_button_3);
+                break;
+            case "C":
+                C.setBackgroundResource(R.drawable.custom_button_3);
+                break;
+            case "D":
+                D.setBackgroundResource(R.drawable.custom_button_3);
+                break;
+        }
+
+
+    }
+
+    private void resetRadioButtonBackgrounds() {
+        A.setBackgroundResource(R.drawable.custom_radiogroup);
+        B.setBackgroundResource(R.drawable.custom_radiogroup);
+        C.setBackgroundResource(R.drawable.custom_radiogroup);
+        D.setBackgroundResource(R.drawable.custom_radiogroup);
     }
 
     private void insertDumpData() {
