@@ -9,7 +9,6 @@
     <color name="dark_green">#27AE60</color>
     <color name="light_green">#F5FFD8</color>
     <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
     <color name="medium_white">#dee2e6</color>
     <color name="yellow">#FFEB3B</color>
     <color name="dark_yellow">#FBB237</color>
@@ -20,4 +19,9 @@
     <color name="light_red">#FFDDD8</color>
     <color name="disable">#DADADA</color>
     <color name="selected_background">#FF5733</color>
+    <color name="button_start">#FF6200EE</color>
+    <color name="button_end">#FF3700B3</color>
+    <color name="ripple_color">#FFBB86FC</color>
+    <color name="white">#FFFFFF</color>
+
 </resources>
