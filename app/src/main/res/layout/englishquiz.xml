@@ -2,7 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background">
+    android:background="@drawable/background"
+    android:padding="16dp">
 
     <TextView
         android:id="@+id/Title"
@@ -24,12 +25,12 @@
         android:layout_height="60dp"
         android:layout_below="@+id/Title"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="40dp"
-        android:background="@drawable/custom_button"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/modern_button"
         android:text="@string/start"
         android:textAllCaps="false"
         android:textColor="@color/white"
-        android:textSize="20sp"
+        android:textSize="18sp"
         android:textStyle="bold" />
 
     <Button
@@ -38,12 +39,12 @@
         android:layout_height="60dp"
         android:layout_below="@+id/Start"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="40dp"
-        android:background="@drawable/custom_button_2"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/modern_button"
         android:text="@string/highscore"
         android:textAllCaps="false"
         android:textColor="@color/white"
-        android:textSize="20sp"
+        android:textSize="18sp"
         android:textStyle="bold" />
 
     <Button
@@ -52,12 +53,12 @@
         android:layout_height="60dp"
         android:layout_below="@+id/HighScore"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="40dp"
-        android:background="@drawable/custom_button_3"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/modern_button"
         android:text="@string/tutorial"
         android:textAllCaps="false"
         android:textColor="@color/white"
-        android:textSize="20sp"
+        android:textSize="18sp"
         android:textStyle="bold" />
 
     <Button
@@ -66,12 +67,11 @@
         android:layout_height="60dp"
         android:layout_below="@+id/Tutorial"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="40dp"
-        android:background="@drawable/custom_button_4"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/modern_button"
         android:text="@string/back"
         android:textAllCaps="false"
         android:textColor="@color/white"
-        android:textSize="20sp"
+        android:textSize="18sp"
         android:textStyle="bold" />
 </RelativeLayout>
-
