@@ -16,7 +16,7 @@
     <string name="playername">What is your name?</string>
     <string name="username">Player Name</string>
     <string name="choose">Choose number of questions</string>
-    <string name="question">Can you guess what is\nin the picture?</string>
+    <string name="question">What does the picture mean?</string>
     <string name="answer">Answer</string>
     <string name="result">Result</string>
     <string name="EQresult">Result Test</string>
