@@ -6,93 +6,106 @@
     android:layout_height="match_parent"
     android:orientation="horizontal">
 
-
     <TextView
         android:id="@+id/Title"
-        android:layout_width="411dp"
-        android:layout_height="167dp"
-        android:layout_marginTop="44dp"
+        android:layout_width="372dp"
+        android:layout_height="161dp"
+        android:layout_marginTop="40dp"
         android:background="@drawable/custom_title"
-
+        android:paddingStart="20sp"
+        android:paddingTop="60sp"
         android:text="@string/LE"
         android:textAlignment="textStart"
         android:textColor="@color/white"
         android:textSize="14sp"
         android:textStyle="bold"
-        android:paddingTop="60sp"
-        android:paddingStart="20sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/EnglishQuiz"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/Title"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="34dp"
-        android:background="@drawable/custom_button"
-        android:text="@string/EQ"
-        android:textAllCaps="false"
-        android:textColor="@color/white"
-        android:textSize="25sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+    <!-- Line Under Title -->
+    <View
+        android:id="@+id/lineUnderTitle"
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/common_google_signin_btn_text_light_pressed"
+        app:layout_constraintEnd_toEndOf="@+id/Title"
+        app:layout_constraintStart_toStartOf="@+id/Title"
         app:layout_constraintTop_toBottomOf="@+id/Title" />
 
-    <Button
-        android:id="@+id/CorrectWord"
-        android:layout_width="250dp"
+    <LinearLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/EnglishQuiz"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="25dp"
-        android:background="@drawable/custom_button"
-        android:text="@string/CQ"
-        android:textAllCaps="false"
-        android:textColor="@color/white"
-        android:textSize="25sp"
-        android:textStyle="bold"
+        android:layout_marginTop="34dp"
+        android:background="@drawable/border_background"
+        android:orientation="vertical"
+        android:padding="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/EnglishQuiz" />
+        app:layout_constraintTop_toBottomOf="@id/lineUnderTitle">
 
-    <Button
-        android:id="@+id/Dictionary"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/CorrectWord"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="25dp"
-        android:background="@drawable/custom_button"
-        android:text="@string/dictionary"
-        android:textAllCaps="false"
-        android:textColor="@color/white"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/CorrectWord" />
+        <Button
+            android:id="@+id/EnglishQuiz"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/custom_button"
+            android:text="@string/EQ"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
-    <Button
-        android:id="@+id/LogOut"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/Dictionary"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="25dp"
-        android:background="@drawable/custom_button"
-        android:text="@string/logout"
-        android:textAllCaps="false"
-        android:textColor="@color/white"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Dictionary" />
+        <Button
+            android:id="@+id/CorrectWord"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:background="@drawable/custom_button"
+            android:text="@string/CQ"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/Dictionary"
+            android:layout_width="251dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="25dp"
+            android:background="@drawable/custom_button"
+            android:text="@string/dictionary"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/Profile"
+            android:layout_width="248dp"
+            android:layout_height="49dp"
+            android:layout_marginTop="25dp"
+            android:background="@drawable/custom_button"
+            android:text="@string/profile"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/LogOut"
+            android:layout_width="246dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="25dp"
+            android:background="@drawable/custom_button"
+            android:text="@string/logout"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
 
     <ImageView
         android:id="@+id/imageView3"
