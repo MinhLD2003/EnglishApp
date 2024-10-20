@@ -34,7 +34,7 @@ public class correctword extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 mediaPlayer.start();
-                Intent intent1 = new Intent(correctword.this, correctword_highscore.class);
+                Intent intent1 = new Intent(correctword.this, correctWordLeaderboard.class);
                 startActivity(intent1);
             }
         });

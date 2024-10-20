@@ -35,7 +35,7 @@
         android:id="@+id/HighScore"
         android:layout_width="200dp"
         android:layout_height="60dp"
-        android:text="@string/highscore"
+        android:text="@string/leaderboard"
         android:layout_marginTop="40dp"
         android:layout_below="@+id/Start"
         android:layout_centerHorizontal="true"

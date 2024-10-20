@@ -31,4 +31,5 @@
     <string name="logout">Logout</string>
     <string name="dictionary">Dictionary</string>
     <string name="title_activity_correct_word_test">correctWordTest</string>
+    <string name="leaderboard">Leaderboard</string>
 </resources>
