@@ -26,11 +26,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
 
-        Register = (Button) findViewById(R.id.DangKy);
-        Login = (Button) findViewById(R.id.DangNhap);
-        Email = (EditText) findViewById(R.id.Email);
-        Password = (EditText) findViewById(R.id.Password);
-        Authentication = (FirebaseAuth)FirebaseAuth.getInstance();
+        Email = findViewById(R.id.Email);
+        Register = findViewById(R.id.DangKy);
+        Login = findViewById(R.id.DangNhap);
+        Password = findViewById(R.id.Password);
+        Authentication = FirebaseAuth.getInstance();
         final MediaPlayer mediaPlayer = MediaPlayer.create(this,R.raw.buttonclick);
 //        final MediaPlayer soundtrack = MediaPlayer.create(this,R.raw.soundtrack);
 //        soundtrack.start();

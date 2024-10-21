@@ -1,10 +1,13 @@
 package com.man.learningenglish;
 
+import static android.content.ContentValues.TAG;
+
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.SystemClock;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -12,11 +15,19 @@ import android.widget.Toast;
 import android.widget.Chronometer;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.SetOptions;
+import com.google.firebase.firestore.Source;
 import com.man.learningenglish.models.Word;
 
 import java.io.BufferedReader;
@@ -27,8 +38,10 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 public class correctWordTest extends AppCompatActivity {
     TextView shuffledWordTextView;
@@ -41,9 +54,6 @@ public class correctWordTest extends AppCompatActivity {
     private int correctAnswers = 0;
 
     private Chronometer chronometer;
-
-    private static final String PREFS_NAME = "QuizPrefs";
-    private static final String BEST_TIME_KEY = "BestTimeOfTheDay";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -132,21 +142,49 @@ public class correctWordTest extends AppCompatActivity {
 
     // Shuffle characters of a word and return it as a slash-separated string
     private String shuffleCharacters(String word) {
-        List<Character> characters = new ArrayList<>();
-        for (char c : word.toCharArray()) {
-            characters.add(c);
-        }
-        Collections.shuffle(characters);
+        // Split the word by space to handle two-segment words like "Washing machine"
+        String[] segments = word.split(" ");  // Use space as the delimiter
 
         StringBuilder shuffledWord = new StringBuilder();
-        for (int i = 0; i < characters.size(); i++) {
-            shuffledWord.append(characters.get(i));
-            if (i < characters.size() - 1) {
-                shuffledWord.append("/");
+
+        // Shuffle characters in each segment
+        for (int i = 0; i < segments.length; i++) {
+            List<Character> characters = new ArrayList<>();
+            for (char c : segments[i].toCharArray()) {
+                characters.add(c);
+            }
+
+            // Store the first character to move it to the end later
+            char firstChar = characters.get(0);
+            characters.remove(0);  // Remove the first character from the list
+
+            Collections.shuffle(characters);  // Shuffle the remaining characters
+
+            // Build the shuffled segment with "/" between characters
+            for (char c : characters) {
+                shuffledWord.append(c);
+                shuffledWord.append("/");  // Add "/" after each character
+            }
+
+            // Add the first character at the end of the shuffled segment
+            shuffledWord.append(firstChar);
+            shuffledWord.append("/");  // Add "/" after the first character
+
+            // Re-add the space between segments except after the last segment
+            if (i < segments.length - 1) {
+                shuffledWord.append(" ");
             }
         }
+
+        // Remove the trailing "/" if necessary
+        if (shuffledWord.length() > 0 && shuffledWord.charAt(shuffledWord.length() - 1) == '/') {
+            shuffledWord.setLength(shuffledWord.length() - 1);  // Remove the last "/"
+        }
+
         return shuffledWord.toString();
     }
+
+
 
     private void checkAnswer() {
         String userAnswer = userAnswerEditText.getText().toString().trim();
@@ -185,7 +223,8 @@ public class correctWordTest extends AppCompatActivity {
         SharedPreferences preferences = getSharedPreferences("quizPrefs", MODE_PRIVATE);
         long bestTimeToday = preferences.getLong("best_time_" + getCurrentDay(), Long.MAX_VALUE); // Initialize with maximum value
         long bestTimeAllTime = preferences.getLong("best_time_all_time", Long.MAX_VALUE);
-        // Compare and save the new highest time if current time is greater
+
+        // Compare and save the new quickest time if current time is less
         SharedPreferences.Editor editor = preferences.edit();
 
         if (currentTime < bestTimeAllTime) {
@@ -198,6 +237,34 @@ public class correctWordTest extends AppCompatActivity {
         }
         editor.apply();
 
+        // Update Firebase Firestore with the user's quickest time
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+        Intent callerIntent = getIntent();
+        Bundle packageFromCaller = callerIntent.getBundleExtra("bundle");
+
+        Map<String, Object> userTime = new HashMap<>();
+        userTime.put("uid", userId); // Only save the UID
+        userTime.put("quickestTime", bestTimeAllTime); // Save the all-time quickest time
+        userTime.put("name", packageFromCaller.getString("name"));
+
+        db.collection("leaderboard").document(userId)
+                .set(userTime, SetOptions.merge()) // Merge with existing data if needed
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d(TAG, "User quickest time successfully updated!");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Error updating quickest time", e);
+                    }
+                });
+
+        // Proceed to the results screen
         Intent intent = new Intent(correctWordTest.this, correctWordResult.class);
         intent.putExtra("currentTime", currentTime); // Time taken in this test
         intent.putExtra("bestTimeToday", bestTimeToday); // Best time of today
@@ -205,4 +272,5 @@ public class correctWordTest extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
+
 }

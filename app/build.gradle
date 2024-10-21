@@ -32,25 +32,32 @@ android {
 
 dependencies {
     //Firebase
+    // Update Firebase BOM to latest version
+    implementation platform('com.google.firebase:firebase-bom:33.4.0')
+
+    // Use Firebase dependencies without version numbers since BOM manages versions
+    implementation 'com.google.firebase:firebase-auth'
+    implementation 'com.google.firebase:firebase-firestore'
+
+    // Update your androidx dependencies to compatible versions
     implementation 'androidx.appcompat:appcompat:1.7.0'
     implementation 'com.google.android.material:material:1.12.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
-    implementation 'com.google.firebase:firebase-auth:23.0.0'
-    implementation 'org.jetbrains:annotations:23.0.0'
+    implementation 'org.jetbrains:annotations:24.0.1'
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.8.6'
-    implementation 'androidx.activity:activity-compose:1.9.2'
-    implementation platform('androidx.compose:compose-bom:2024.09.03')
+    implementation 'androidx.activity:activity-compose:1.9.3'
+    implementation platform('androidx.compose:compose-bom:2024.10.00')
     implementation 'androidx.compose.ui:ui'
     implementation 'androidx.compose.ui:ui-graphics'
     implementation 'androidx.compose.ui:ui-tooling-preview'
     implementation 'androidx.compose.material3:material3'
-    implementation 'androidx.activity:activity:1.9.2'
+    implementation 'androidx.activity:activity:1.9.3'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.2.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.6.1'
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
-    androidTestImplementation platform('androidx.compose:compose-bom:2024.09.03')
+    androidTestImplementation platform('androidx.compose:compose-bom:2024.10.00')
     androidTestImplementation 'androidx.compose.ui:ui-test-junit4'
     debugImplementation 'androidx.compose.ui:ui-tooling'
     debugImplementation 'androidx.compose.ui:ui-test-manifest'
