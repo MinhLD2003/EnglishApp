@@ -190,15 +190,20 @@ public class correctWordTest extends AppCompatActivity {
         String userAnswer = userAnswerEditText.getText().toString().trim();
         Word currentWord = randomWords.get(currentWordIndex);
 
-        if (userAnswer.equalsIgnoreCase(currentWord.getOriginal())) {
-            correctAnswers++;
-            Toast.makeText(correctWordTest.this, "Correct!", Toast.LENGTH_SHORT).show();
-            currentWordIndex++;
-            userAnswerEditText.setText(""); // Clear the input field
-            showNextShuffledWord();
-        } else {
-            Toast.makeText(correctWordTest.this, "Incorrect, try again!", Toast.LENGTH_SHORT).show();
-        }
+//        if (userAnswer.equalsIgnoreCase(currentWord.getOriginal())) {
+//            correctAnswers++;
+//            Toast.makeText(correctWordTest.this, "Correct!", Toast.LENGTH_SHORT).show();
+//            currentWordIndex++;
+//            userAnswerEditText.setText(""); // Clear the input field
+//            showNextShuffledWord();
+//        } else {
+//            Toast.makeText(correctWordTest.this, "Incorrect, try again!", Toast.LENGTH_SHORT).show();
+//        }
+        correctAnswers++;
+        Toast.makeText(correctWordTest.this, "Correct!", Toast.LENGTH_SHORT).show();
+        currentWordIndex++;
+        userAnswerEditText.setText(""); // Clear the input field
+        showNextShuffledWord();
     }
 
     private void showNextShuffledWord() {
