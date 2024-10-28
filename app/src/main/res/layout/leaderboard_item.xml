@@ -6,29 +6,45 @@
     android:padding="8dp">
 
     <TextView
-        android:id="@+id/username"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="2"
-        android:text="Username"
-        android:textColor="@color/black"
-        android:textSize="16sp" />
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@drawable/custom_x"
+        android:id="@+id/img_text"
+        android:text="A"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:textSize="15sp"
+        android:gravity="center"
+        />
 
-    <TextView
-        android:id="@+id/best_time"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="Time: 0:00"
-        android:textColor="@color/black"
-        android:textSize="16sp" />
-
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginStart="16dp"
+        android:orientation="vertical"
+        >
+        <TextView
+            android:id="@+id/username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="You"
+            android:textColor="@color/black"
+            />
+        <TextView
+            android:id="@+id/best_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Time: 0:00"
+            />
+    </LinearLayout>
     <TextView
         android:id="@+id/rank"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="Rank: 1"
+        android:text="Rank: NA"
         android:textColor="@color/black"
-        android:textSize="16sp" />
+        android:gravity="end"
+        android:layout_weight="1"
+        android:layout_marginEnd="24dp"
+        />
 </LinearLayout>
