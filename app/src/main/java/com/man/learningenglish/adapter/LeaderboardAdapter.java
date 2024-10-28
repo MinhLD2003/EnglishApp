@@ -46,6 +46,7 @@ public class LeaderboardAdapter extends RecyclerView.Adapter<LeaderboardAdapter.
     }
 
     public static class LeaderboardViewHolder extends RecyclerView.ViewHolder {
+        TextView imgText;
         TextView usernameText, bestTimeText, rankText;
 
         public LeaderboardViewHolder(@NonNull View itemView) {
@@ -53,6 +54,7 @@ public class LeaderboardAdapter extends RecyclerView.Adapter<LeaderboardAdapter.
             usernameText = itemView.findViewById(R.id.username);
             bestTimeText = itemView.findViewById(R.id.best_time);
             rankText = itemView.findViewById(R.id.rank);
+            imgText = itemView.findViewById(R.id.img_text);
         }
 
         public void bind(Leaderboard user) {
@@ -62,6 +64,7 @@ public class LeaderboardAdapter extends RecyclerView.Adapter<LeaderboardAdapter.
                         user.getTime() / 60000,
                         (user.getTime() % 60000) / 1000));
                 rankText.setText("Rank: " + user.getRank());
+                imgText.setText(user.getName().substring(0,1));
             }
         }
     }
